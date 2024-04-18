@@ -1,0 +1,15 @@
+.content{
+    width: 390px;
+    margin-top: 20%; 
+}
+
+.register{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form{
+    display: grid;
+    align-content: space-evenly;
+}
