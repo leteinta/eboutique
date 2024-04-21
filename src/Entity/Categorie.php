@@ -21,7 +21,7 @@ class Categorie
     #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'categorie')]
     private Collection $produits;
 
-    #[ORM\ManyToMany(targetEntity: produit::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'categories')]
     private Collection $produit;
 
     public function __construct()
@@ -75,7 +75,7 @@ class Categorie
     }
 
     /**
-     * @return Collection<int, produit>
+     * @return Collection<int, Produit>
      */
     public function getProduit(): Collection
     {

@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
+use App\Repository\ProduitRepository;
 
 #[Route('/categorie')]
 class CategorieController extends AbstractController
@@ -77,5 +79,17 @@ class CategorieController extends AbstractController
         }
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/produits', name: 'app_categorie_produits', methods: ['GET'])]
+    public function produitsParCategorie(Categorie $categorie, ProduitRepository $produitRepository): Response
+    {
+        $produits = $categorie->getProduit();
+        dd($produits[0]);
+
+        return $this->render('produit/produits_par_categorie.html.twig', [
+            'categorie' => $categorie,
+            'produits' => $produits,
+        ]);
     }
 }

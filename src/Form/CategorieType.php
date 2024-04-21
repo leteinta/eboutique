@@ -15,11 +15,6 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nomCategorie')
-            ->add('produits', EntityType::class, [
-                'class' => Produit::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
         ;
     }
 

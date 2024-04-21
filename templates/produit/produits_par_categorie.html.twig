@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits de la catégorie {{ categorie.nomCategorie }}{% endblock %}
+
+{% block body %}
+    <h1>Produits de la catégorie {{ categorie.nomCategorie }} :</h1>
+    <ul>
+        {% for produit in produits %}
+            <p>{{ produit.nom }}</p>
+            <!-- Affichez d'autres informations sur le produit selon vos besoins -->
+        {% endfor %}
+
+    </ul>
+{% endblock %}

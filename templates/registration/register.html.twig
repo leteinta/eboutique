@@ -9,13 +9,37 @@
 
 {% block body %}
     <div class="content">
-        <div class="register p-4">
+        <div class="card p-4">
             <h1 class="h3 font-weight-normal text-center my-3">Inscription</h1>
 
             {{ form_errors(registrationForm) }}
 
             {{ form_start(registrationForm) }}
             <div class='my-3'>
+                <div class="form-floating mb-3">
+                    {{ form_widget(registrationForm.prenom, {
+                        'attr': {'class': 'form-control', 'id': 'floatingPrenom'}
+                    }) }}
+                    {{ form_label(registrationForm.prenom, 'Prénom', {
+                        'label_attr': {'class': 'form-label', 'for': 'floatingPrenom'}
+                    }) }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form_widget(registrationForm.nom, {
+                        'attr': {'class': 'form-control', 'id': 'floatingNom'}
+                    }) }}
+                    {{ form_label(registrationForm.nom, 'Nom', {
+                        'label_attr': {'class': 'form-label', 'for': 'floatingNom'}
+                    }) }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form_widget(registrationForm.numTel, {
+                        'attr': {'class': 'form-control', 'id': 'floatingTel'}
+                    }) }}
+                    {{ form_label(registrationForm.numTel, 'Numéro de téléphone', {
+                        'label_attr': {'class': 'form-label', 'for': 'floatingTel'}
+                    }) }}
+                </div>
                 <div class="form-floating mb-3">
                     {{ form_widget(registrationForm.email, {
                         'attr': {'class': 'form-control', 'id': 'floatingEmail'}

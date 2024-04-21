@@ -1,4 +1,32 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Création catégorie{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="card p-4">
+            <h1 class="h3 font-weight-normal text-center my-3">Création de catégorie</h1>
+            {{ form_start(form) }}
+            <div class='my-3'>
+                <div class="form-floating mb-3">
+                    {{ form_widget(form.nomCategorie, {
+                        'attr': {'class': 'form-control', 'id': 'floatingNomCategorie'}
+                    }) }}
+                    {{ form_label(form.nomCategorie, 'Nom catégorie', {
+                        'label_attr': {'class': 'form-label', 'for': 'floatingNomCategorie'}
+                    }) }}
+                </div>
+                <div class='text-center my-3'>
+                    <button class="btn btn-primary">{{ button_label|default('Créer') }}</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

@@ -23,7 +23,7 @@ class LigneCommande
     private ?commande $commande = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?produit $produit = null;
+    private ?Produit $produit = null;
 
     public function getId(): ?int
     {
@@ -66,12 +66,12 @@ class LigneCommande
         return $this;
     }
 
-    public function getProduit(): ?produit
+    public function getProduit(): ?Produit
     {
         return $this->produit;
     }
 
-    public function setProduit(?produit $produit): static
+    public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
 

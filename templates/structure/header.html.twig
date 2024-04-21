@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/header.css') }}">
+{% endblock %}
+
+{% block body %}
+    <header class="navbar ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <img src="{{ asset('img/GameAlley.png') }}" alt="logo Game Alley">
+            </a>
+            <ul class="nav">
+                {% for categorie in categories %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_categorie_produits', {'id': categorie.id}) }}">{{ categorie.nomCategorie }}</a></li>
+                {% endfor %}
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+{% endblock %}

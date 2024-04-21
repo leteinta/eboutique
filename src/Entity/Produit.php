@@ -17,14 +17,14 @@ class Produit
 
     #[ORM\Column(length: 50)]
     private ?string $nomProduit = null;
-
+ 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\ManyToMany(targetEntity: categorie::class, inversedBy: 'produits')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'produits')]
     private Collection $categorie;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'produit')]

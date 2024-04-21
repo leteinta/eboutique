@@ -1,15 +1,22 @@
-.content{
-    width: 390px;
-    margin-top: 20%; 
+.content {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    /* Ajustez la largeur maximale selon vos besoins */
+    margin: 150px auto;
+    /* Centre le contenu verticalement et horizontalement */
 }
 
-.register{
+.card {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    /* Ajoute de l'espace intérieur pour le contenu */
 }
 
-.form{
+.form {
     display: grid;
-    align-content: space-evenly;
+    gap: 20px;
+    /* Ajoute de l'espace entre les éléments du formulaire */
 }
