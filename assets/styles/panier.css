@@ -1,0 +1,10 @@
+.btn-supprimer {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-supprimer svg {
+    width: 16px;
+    font-size: 20px;
+}

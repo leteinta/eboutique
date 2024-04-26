@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Categorie;
 
 /**
  * @extends ServiceEntityRepository<Produit>

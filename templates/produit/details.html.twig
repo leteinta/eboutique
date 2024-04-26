@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit.nomProduit }} - Détails du Produit{% endblock %}
+
+{% block body %}
+    <div class="container" style='justify-items: center'>
+        <div class="card" style="width: 80%; margin: 20px;">
+            {% set imageName = produit.nomProduit|replace({' ': '-'}) %}
+            <img class='card-img-top' src="{{ asset('img/produits/' ~ imageName ~ '.jpg') }}" alt="{{ produit.nomProduit }}" class="img-fluid">
+            <div class="card-body">
+                <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                <p class="card-text">{{ produit.description }}</p>
+                <p class="card-text"><strong>Prix :</strong> {{ produit.prix }} €</p>
+                <form action="{{ path('ajouter_produit_panier', {id: produit.id}) }}" method="POST">
+                    <input type="hidden" name="produit_id" value="{{ produit.id }}">
+                    <button type="submit" class='btn btn-dark'>Ajouter au panier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

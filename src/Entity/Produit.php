@@ -18,7 +18,7 @@ class Produit
     #[ORM\Column(length: 50)]
     private ?string $nomProduit = null;
  
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 1000)]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -27,13 +27,13 @@ class Produit
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'produits')]
     private Collection $categorie;
 
-    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'produit')]
-    private Collection $categories;
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: LigneCommande::class)]
+    private Collection $ligneCommandes;
 
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
-        $this->categories = new ArrayCollection();
+        $this->ligneCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,14 +78,14 @@ class Produit
     }
 
     /**
-     * @return Collection<int, categorie>
+     * @return Collection<int, Categorie>
      */
     public function getCategorie(): Collection
     {
         return $this->categorie;
     }
 
-    public function addCategorie(categorie $categorie): static
+    public function addCategorie(Categorie $categorie): static
     {
         if (!$this->categorie->contains($categorie)) {
             $this->categorie->add($categorie);
@@ -94,7 +94,7 @@ class Produit
         return $this;
     }
 
-    public function removeCategorie(categorie $categorie): static
+    public function removeCategorie(Categorie $categorie): static
     {
         $this->categorie->removeElement($categorie);
 
@@ -102,29 +102,34 @@ class Produit
     }
 
     /**
-     * @return Collection<int, Categorie>
+     * @return Collection<int, LigneCommande>
      */
-    public function getCategories(): Collection
+    public function getLigneCommandes(): Collection
     {
-        return $this->categories;
+        return $this->ligneCommandes;
     }
 
-    public function addCategory(Categorie $category): static
+    public function addLigneCommande(LigneCommande $ligneCommande): static
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addProduit($this);
+        if (!$this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes->add($ligneCommande);
+            $ligneCommande->setProduit($this);
         }
 
         return $this;
     }
 
-    public function removeCategory(Categorie $category): static
+    public function removeLigneCommande(LigneCommande $ligneCommande): static
     {
-        if ($this->categories->removeElement($category)) {
-            $category->removeProduit($this);
+        if ($this->ligneCommandes->removeElement($ligneCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getProduit() === $this) {
+                $ligneCommande->setProduit(null);
+            }
         }
 
         return $this;
     }
+
+    
 }

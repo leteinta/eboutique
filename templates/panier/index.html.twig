@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/panier.css') }}">
+{% endblock %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <div class="container py-3">
+        <div class="row">
+            <!-- Section Panier -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        Mon Panier
+                    </div>
+                    <div class="card-body">
+                        <!-- Lignes de commande -->
+                        <div class="ligne-commande">
+                            {% for ligneCommande in ligneCommandes %}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% set imageName = ligneCommande.produit.nomProduit|replace({' ': '-'}) %}
+                                        <img src="{{ asset('img/produits/' ~ imageName ~ '.jpg') }}" alt="{{ ligneCommande.produit.nomProduit }}" class="img-fluid" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>{{ ligneCommande.produit.nomProduit }}</h3>
+                                        <p>Prix unitaire : {{ ligneCommande.prixUnitaire }} €</p>
+                                        <!-- Input pour la quantité -->
+                                        <form action="{{ path('modifier_quantite_panier', {'id': ligneCommande.id}) }}" method="POST">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" value="{{ ligneCommande.quantite }}" aria-label="Quantité" aria-describedby="btn-add" >
+                                                <button class="btn btn-outline-secondary" type="button" id="btn-modif">Modifier</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <form action="{{ path('supprimer_produit_panier', {'id': ligneCommande.id}) }}" method="POST">
+                                            <button type="submit" class="btn-supprimer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1 -32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.7 23.7 0 0 0 -21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0 -16-16z"/></svg></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Total -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Total
+                    </div>
+                    <div class="card-body">
+                        <!-- Affichage du total -->
+                        <p>Total du panier: {{ totalPanier }} €</p>
+                        <!-- Bouton de paiement -->
+                        <form action="{{ path('confirmation')}}" method="GET">
+                            <button type="submit" class="btn btn-dark">Paiement</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

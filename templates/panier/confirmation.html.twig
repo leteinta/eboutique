@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/panier.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container py-4">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Confirmation de la commande</h5>
+                    <p class="card-text">Nous vous confirmons que votre commande à bien été enregistrée.</p>
+                    <div class='text-center row'>
+                        <div class='col'>
+                            <a href="{{ path('home') }}" class="btn btn-dark">Retour à l'accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

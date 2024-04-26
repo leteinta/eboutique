@@ -1,0 +1,29 @@
+{% block body %}
+    <div class="container py-4">
+        <div class="row">
+            {% for produit in produits %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% set imageName = produit.nomProduit|replace({' ': '-'}) %}
+                        <img src="{{ asset('img/produits/' ~ imageName ~ '.jpg') }}" class="card-img-top" alt="{{ produit.nomProduit }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                            <p class="card-text">{{ produit.prix }} €</p>
+                            <div class='text-center row'>
+                                <div class='col'>
+                                    <a href="{{ path('app_produit_detail', {'id': produit.id}) }}" class="btn btn-dark">Voir détails</a>
+                                </div>
+                                <div class='col'>
+                                    <form action="{{ path('ajouter_produit_panier', {id: produit.id}) }}" method="POST">
+                                        <input type="hidden" name="produit_id" value="{{ produit.id }}">
+                                        <button type="submit" class='btn btn-dark'>Ajouter au panier</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -19,11 +19,13 @@ class Commande
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCommande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?User $user = null;
-
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: LigneCommande::class)]
     private Collection $ligneCommandes;
+
+    #[ORM\OneToOne(mappedBy: 'commande', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+    
 
     public function __construct()
     {
@@ -43,18 +45,6 @@ class Commande
     public function setDateCommande(\DateTimeInterface $dateCommande): static
     {
         $this->dateCommande = $dateCommande;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -88,4 +78,28 @@ class Commande
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setCommande(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getCommande() !== $this) {
+            $user->setCommande($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+ 
 }

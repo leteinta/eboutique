@@ -6,4 +6,37 @@ controllers:
 
 home:
     path: /
+    controller: App\Controller\ProduitController::home
+    
+produit:
+    path: /produit
+    controller: App\Controller\ProduitController::index
+
+categorie:
+    path: /categorie
     controller: App\Controller\CategorieController::index
+
+app_produit_detail:
+    path: '/produit/{id}'
+    controller: 'App\Controller\ProduitController::detail'
+
+app_produit_show:
+    path: '/produit/{id}'
+    controller: 'App\Controller\ProduitController::show'
+
+app_login:
+    path: '/login'
+    controller: 'App\Controller\SecurityController::login'
+
+ajouter_produit_panier:
+    path: '/panier/ajouter/{id}'
+    controller: 'App\Controller\PanierController::ajouterProduitPanier'
+
+supprimer_produit_panier:
+    path: '/supprimer/{id}'
+    controller: 'App\Controller\PanierController::supprimerProduit'
+
+panier:
+    path: '/panier'
+    controller: 'App\Controller\PanierController::panier'
+

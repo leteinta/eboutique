@@ -20,10 +20,11 @@ class LigneCommande
     private ?float $prixUnitaire = null;
 
     #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
-    private ?commande $commande = null;
+    private ?Commande $commande = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'ligneCommandes')]
     private ?Produit $produit = null;
+
 
     public function getId(): ?int
     {
@@ -59,7 +60,7 @@ class LigneCommande
         return $this->commande;
     }
 
-    public function setCommande(?commande $commande): static
+    public function setCommande(?Commande $commande): static
     {
         $this->commande = $commande;
 
@@ -77,4 +78,5 @@ class LigneCommande
 
         return $this;
     }
+
 }
