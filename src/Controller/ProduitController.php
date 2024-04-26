@@ -31,7 +31,7 @@ class ProduitController extends AbstractController
         ]);
     }
     
-    #[Route('/index/admin', name: 'app_produit_index', methods: ['GET'])]
+    #[Route('/index', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository, CategorieRepository $categorieRepository): Response
     {
         $categories = $categorieRepository->findAll();
@@ -41,7 +41,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/new/admin', name: 'app_produit_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, CategorieRepository $categorieRepository): Response
     {
         $produit = new Produit();
@@ -74,7 +74,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit/admin', name: 'app_produit_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager, CategorieRepository $categorieRepository): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
@@ -93,7 +93,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/admin', name: 'app_produit_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
